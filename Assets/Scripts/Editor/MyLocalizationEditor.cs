@@ -6,7 +6,7 @@ public class MyLocalizationEditor : EditorWindow
     private const int ItemListWidth = 350;
     private const int CurrentItemWidth = 500;
 
-    private MyLocalization textCollection;
+    private MyLocalization myLocalization;
     private LocalizationItem currentItem;
     private Vector2 scrollPosition;
 
@@ -19,10 +19,10 @@ public class MyLocalizationEditor : EditorWindow
 
     private void OnEnable()
     {
-        textCollection = Resources.Load<MyLocalization>("MyLocalization");
-        if (textCollection.Items.Count > 0)
+        myLocalization = Resources.Load<MyLocalization>("MyLocalization");
+        if (myLocalization.Items.Count > 0)
         {
-            currentItem = textCollection.Items[0];
+            currentItem = myLocalization.Items[0];
         }
     }
 
@@ -38,7 +38,7 @@ public class MyLocalizationEditor : EditorWindow
 
         GUILayout.BeginVertical(GUILayout.Width(ItemListWidth));
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-        foreach (var item in textCollection.Items)
+        foreach (var item in myLocalization.Items)
         {
             DrawItemButton(item);
         }
@@ -54,7 +54,7 @@ public class MyLocalizationEditor : EditorWindow
 
         if (EditorGUI.EndChangeCheck())
         {
-            EditorUtility.SetDirty(textCollection);
+            EditorUtility.SetDirty(myLocalization);
         }
     }
 
@@ -63,8 +63,8 @@ public class MyLocalizationEditor : EditorWindow
         if (GUILayout.Button("Add"))
         {
             GUI.FocusControl(null);
-            var textCollectionItem = new LocalizationItem(textCollection.Variants);
-            textCollection.Items.Add(textCollectionItem);
+            var textCollectionItem = new LocalizationItem(myLocalization.Variants);
+            myLocalization.Items.Add(textCollectionItem);
             currentItem = textCollectionItem;
         }
 
@@ -76,11 +76,11 @@ public class MyLocalizationEditor : EditorWindow
             }
 
             GUI.FocusControl(null);
-            var currentItemIndex = textCollection.Items.IndexOf(currentItem);
-            textCollection.Items.Remove(currentItem);
+            var currentItemIndex = myLocalization.Items.IndexOf(currentItem);
+            myLocalization.Items.Remove(currentItem);
             if (currentItemIndex > 0)
             {
-                currentItem = textCollection.Items[currentItemIndex - 1];
+                currentItem = myLocalization.Items[currentItemIndex - 1];
             }
         }
     }
@@ -109,8 +109,13 @@ public class MyLocalizationEditor : EditorWindow
 
         currentItem.Id = EditorGUILayout.TextField("Id:", currentItem.Id);
 
-        for (int i = 0; i < currentItem.TextVariants.Count; i++)
+        for (int i = 0; i < myLocalization.Variants; i++)
         {
+            if (currentItem.TextVariants.Count < myLocalization.Variants)
+            {
+                currentItem.TextVariants.Add("");
+            }
+
             currentItem.TextVariants[i] = GUILayout.TextArea(currentItem.TextVariants[i]);
         }
     }

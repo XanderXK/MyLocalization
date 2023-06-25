@@ -8,6 +8,11 @@ public class TextLocalization : MonoBehaviour
 
     private void OnEnable()
     {
+        SetText();
+    }
+
+    public void SetText()
+    {
         GetComponent<TextMeshProUGUI>().text = MyLocalization.GetText(id);
     }
 }

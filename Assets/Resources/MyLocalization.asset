@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6a61bc302ef6b9b900a5f598ac45be, type: 3}
   m_Name: MyLocalization
   m_EditorClassIdentifier: 
-  variants: 3
-  items:
+  <Variants>k__BackingField: 3
+  <Items>k__BackingField:
   - <Id>k__BackingField: title
-    <TextVariants>k__BackingField: []
+    <TextVariants>k__BackingField:
+    - Title
+    - Nice Title
+    - Awesome Title
