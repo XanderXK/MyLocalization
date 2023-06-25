@@ -1,0 +1,17 @@
+/Library
+/Temp
+/Logs
+/UserSettings
+/[o]bj
+/.vs
+/.vscode
+*.editorconfig
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+.vsconfig
+/Saves
